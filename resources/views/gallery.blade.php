@@ -13,7 +13,7 @@
 
 @section('content')
     <div class="container">
-        <div class="row" >
+        <div class="row mt-4">
             <form action="{{ route('search') }}" method="get">
                 <div class="row d-flex justify-content-center">
                     <input type="text" class="col-3 mx-sm-3 mb-2" name="term" placeholder="ابحث عن كتاب...">
