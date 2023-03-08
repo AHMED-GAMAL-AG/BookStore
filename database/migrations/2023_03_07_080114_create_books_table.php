@@ -22,7 +22,7 @@ return new class extends Migration
             $table->unsignedBigInteger('number_of_pages');
             $table->unsignedBigInteger('number_of_copies');
             $table->decimal('price', 8, 2); // 8 max digits 2 digits after ,00
-            $table->string('cover_images'); // image path
+            $table->string('cover_image'); // image path
             $table->timestamps();
 
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('set null'); // on deleting the category the book category_id will be set to null
