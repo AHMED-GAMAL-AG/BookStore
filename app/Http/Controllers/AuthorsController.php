@@ -62,4 +62,29 @@ class AuthorsController extends Controller
     {
         //
     }
+
+    public function results(Author $author) // get all the books by this author
+    {
+        $books  = $author->books()->paginate(12);
+        $title = ' الكتب التابعة للمؤلف: ' . $author->name;
+
+        return view('gallery', compact('books', 'title'));
+    }
+
+    public function list() // to get a list of all the authors
+    {
+        $authors = Author::all()->sortBy('name');
+        $title = 'المؤلفون';
+
+        return view('authors.index', compact('authors', 'title'));
+    }
+
+    public function search(Request $request)
+    {
+        // ${}$ the two $ means that search what user entered {} regardless of what is before and after it , term the the input name in the view name="term"
+        $authors = Author::where('name', 'like', "%{$request->term}%")->get()->sortBy('name');
+        $title = ' نتائج البحث عن: ' . $request->term;
+
+        return view('authors.index', compact('authors', 'title'));
+    }
 }
