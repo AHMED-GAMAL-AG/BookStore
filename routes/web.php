@@ -41,3 +41,7 @@ Route::get('publishers/{publisher}', [PublishersController::class, 'results'])->
 Route::get('authors/', [AuthorsController::class, 'list'])->name('gallery.authors.index');;
 Route::get('authors/search/', [AuthorsController::class, 'search'])->name('gallery.authors.search');
 Route::get('authors/{author}', [AuthorsController::class, 'results'])->name('gallery.authors.show'); // the {author} is send from the authors.index view in the href
+
+Route::get('admin/' ,function(){
+    return view('admin-theme.default');
+});
