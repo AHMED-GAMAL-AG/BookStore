@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BooksController;
 use App\Http\Controllers\GalleryController;
 use Illuminate\Support\Facades\Route;
 
@@ -23,3 +24,6 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
 Route::get('/', [GalleryController::class, 'index'])->name('gallery.index');
 
 Route::get('/search', [GalleryController::class, 'search'])->name('search');
+
+// the {book} is send from the gallery view in the href
+Route::get('/book{book}', [BooksController::class, 'details'])->name('book.details');
