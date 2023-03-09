@@ -51,7 +51,8 @@
                                                     {{ $book->title }}
                                                 </a>
                                             </h6>
-                                            <a href="#" class="text-muted" data-abc="true">
+                                            <a href="{{ route('gallery.categories.show', $book->category) }}"
+                                                class="text-muted" data-abc="true">
                                                 @if ($book->category != null)
                                                     {{ $book->category->name }}
                                                 @endif
@@ -72,7 +73,7 @@
                     @endforeach
                 @else
                     <div class="alert alert-info" role="alert">
-                        لا نتائج
+                        لا يوجد نتائج
                     </div>
                 @endif
             </div>

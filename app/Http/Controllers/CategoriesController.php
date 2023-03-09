@@ -62,4 +62,29 @@ class CategoriesController extends Controller
     {
         //
     }
+
+    public function results(Category $category) // get all the books in this category
+    {
+        $books  = $category->books()->paginate(12);
+        $title = ' الكتب التابعة للتصنيف: ' . $category->name;
+
+        return view('gallery', compact('books', 'title'));
+    }
+
+    public function list() // to get a list of all the categories
+    {
+        $categories = Category::all()->sortBy('name');
+        $title = 'التصنيفات';
+
+        return view('categories.index', compact('categories', 'title'));
+    }
+
+    public function search(Request $request)
+    {
+        // ${}$ the two $ means that search what user entered {} regardless of what is before and after it , term the the input name in the view name="term"
+        $categories = Category::where('name', 'like', "%{$request->term}%")->get()->sortBy('name');
+        $title = ' نتائج البحث عن: ' . $request->term;
+
+        return view('categories.index', compact('categories', 'title'));
+    }
 }
