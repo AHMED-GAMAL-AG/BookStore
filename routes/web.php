@@ -3,6 +3,7 @@
 use App\Http\Controllers\BooksController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\GalleryController;
+use App\Http\Controllers\PublishersController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,6 +32,9 @@ Route::get('/book{book}', [BooksController::class, 'details'])->name('book.detai
 
 Route::get('categories', [CategoriesController::class, 'list'])->name('gallery.categories.index');
 Route::get('categories/search', [CategoriesController::class, 'search'])->name('gallery.categories.search');
+Route::get('categories/{category}', [CategoriesController::class, 'results'])->name('gallery.categories.show'); // the {category} is send from the categories.index view in the href
 
-// the {category} is send from the gallery view in the href
-Route::get('categories/{category}', [CategoriesController::class, 'results'])->name('gallery.categories.show');
+
+Route::get('publishers/', [PublishersController::class, 'list'])->name('gallery.publishers.index');
+Route::get('publishers/search/', [PublishersController::class, 'search'])->name('gallery.publishers.search');
+Route::get('publishers/{publisher}', [PublishersController::class, 'results'])->name('gallery.publishers.show'); // the {publisher} is send from the publishers.index view in the href

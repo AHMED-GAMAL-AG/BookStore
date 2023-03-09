@@ -62,4 +62,29 @@ class PublishersController extends Controller
     {
         //
     }
+
+    public function results(Publisher $publisher) // get all the books by this publisher
+    {
+        $books  = $publisher->books()->paginate(12);
+        $title = ' الكتب التابعة للناشر: ' . $publisher->name;
+
+        return view('gallery', compact('books', 'title'));
+    }
+
+    public function list() // to get a list of all the publishers
+    {
+        $publishers = Publisher::all()->sortBy('name');
+        $title = 'الناشرون';
+
+        return view('publishers.index', compact('publishers', 'title'));
+    }
+
+    public function search(Request $request)
+    {
+        // ${}$ the two $ means that search what user entered {} regardless of what is before and after it , term the the input name in the view name="term"
+        $publishers = Publisher::where('name', 'like', "%{$request->term}%")->get()->sortBy('name');
+        $title = ' نتائج البحث عن: ' . $request->term;
+
+        return view('publishers.index', compact('publishers', 'title'));
+    }
 }

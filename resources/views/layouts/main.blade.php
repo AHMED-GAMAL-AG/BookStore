@@ -45,7 +45,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{ route('gallery.publishers.index') }}" class="nav-link">
                                 الناشرون <i class="fas fa-table"></i>
                             </a>
                         </li>
