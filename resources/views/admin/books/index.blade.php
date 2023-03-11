@@ -1,0 +1,63 @@
+@extends('admin-theme.default')
+
+{{-- for css --}}
+@section('head')
+    <link href={{ asset('admin-theme/vendor/datatables/dataTables.bootstrap4.min.css') }} rel="stylesheet">
+@endsection
+{{-- the @yield('heading') on admin-theme.header --}}
+@section('heading')
+    عرض الكتب
+@endsection
+
+@section('content')
+    <div class="row">
+        <table id="books-table" class="table table-striped table-bordered text-right" width="100%" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>العنوان</th>
+                    <th>الرقم التسلسلي</th>
+                    <th>التصنيف</th>
+                    <th>المؤلفون</th>
+                    <th>الناشر</th>
+                    <th>السعر</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach ($books as $book)
+                    <tr>
+                        <td><a href="#">{{ $book->title }}</a></td>
+                        <td>{{ $book->isbn }}</td>
+                        <td>{{ $book->category != null ? $book->category->name : 'لا يوجد تصنيف' }}</td>
+                        <td>
+                            @if ($book->authors()->count() > 0)
+                                {{-- check if the book has mor than one author --}}
+                                @foreach ($book->authors as $author)
+                                    {{ $loop->first ? '' : 'و' }}
+                                    {{ $author->name }}
+                                @endforeach
+                            @endif
+                        </td>
+                        <td>{{ $book->publisher != null ? $book->publisher->name : 'لا يوجد ناشر' }}</td>
+                        <td>{{ $book->price }} $</td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+@endsection
+
+@section('script')
+    <!-- Page level plugins -->
+    <script src={{ asset('admin-theme/vendor/datatables/jquery.dataTables.min.js') }}></script>
+    <script src={{ asset('admin-theme/vendor/datatables/dataTables.bootstrap4.min.js') }}></script>
+    <script>
+        $(document).ready(function() {
+            $('#books-table').DataTable({
+                'language': {
+                    'url': '//cdn.datatables.net/plug-ins/1.13.3/i18n/ar.json'
+                }
+            });
+        });
+    </script>
+@endsection

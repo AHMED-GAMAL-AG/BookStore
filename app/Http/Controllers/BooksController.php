@@ -10,9 +10,11 @@ class BooksController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index() // show a table with all the books to the admin
     {
-        //
+        $books = Book::all();
+
+        return view('admin.books.index', compact('books'));
     }
 
     /**
@@ -63,7 +65,7 @@ class BooksController extends Controller
         //
     }
 
-    public function details(Book $book)
+    public function details(Book $book) // show the book details when clicked by the user
     {
         return view('books.details', compact('book'));
     }

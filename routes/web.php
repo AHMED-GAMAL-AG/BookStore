@@ -49,3 +49,5 @@ Route::get('/admin', function () {
 
 
 Route::get('/admin', [AdminsController::class, 'index'])->name('admin.index');
+
+Route::get('/admin/books', [BooksController::class, 'index'])->name('books.index'); // show a table with all the books to the admin
