@@ -28,7 +28,7 @@
             <tbody>
                 @foreach ($books as $book)
                     <tr>
-                        <td><a href="#">{{ $book->title }}</a></td>
+                        <td><a href="{{ route('books.show', $book) }}">{{ $book->title }}</a></td>
                         <td>{{ $book->isbn }}</td>
                         <td>{{ $book->category != null ? $book->category->name : 'لا يوجد تصنيف' }}</td>
                         <td>

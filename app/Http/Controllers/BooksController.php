@@ -75,9 +75,9 @@ class BooksController extends Controller
 
         // 'flash_message' is the 'flash_message' used in default.blade.php @if (Session::has('flash_message'))
         // session is a helper to manage session variables
-        session()->flash('flash_message' , 'تمت إضافة الكتاب بنجاح');
+        session()->flash('flash_message', 'تمت إضافة الكتاب بنجاح');
 
-        //return redirect(route('books.show')); // show the book details
+        return redirect(route('books.show', $book)); // show the book details for admin
     }
 
     /**
@@ -85,7 +85,7 @@ class BooksController extends Controller
      */
     public function show(Book $book)
     {
-        //
+        return view('admin.books.show', compact('book'));
     }
 
     /**
