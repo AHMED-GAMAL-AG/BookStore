@@ -53,3 +53,5 @@ Route::get('/admin/books', [BooksController::class, 'index'])->name('books.index
 Route::get('/admin/books/create', [BooksController::class, 'create'])->name('books.create'); // to show add book form for admin
 Route::post('admin/books', [BooksController::class, 'store'])->name('books.store'); // to submit the add book form
 Route::get('admin/books/{book}', [BooksController::class, 'show'])->name('books.show'); // to show the book details for admin
+Route::get('admin/books/{book}/edit', [BooksController::class, 'edit'])->name('books.edit'); // to show the book details for admin
+Route::patch('admin/books/{book}', [BooksController::class, 'update'])->name('books.update'); // to show the book details for admin

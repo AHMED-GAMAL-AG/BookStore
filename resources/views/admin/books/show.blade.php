@@ -45,12 +45,12 @@
                                         alt="{{ $book->title }}"></td>
                             </tr>
 
-                            @if ($book->category)
-                                <tr>
-                                    <th>التصنيف</th>
-                                    <td>{{ $book->category->name }}</td>
-                                </tr>
-                            @endif
+                            {{-- @if ($book->category) --}}
+                            <tr>
+                                <th>التصنيف</th>
+                                <td>{{ $book->category != null ? $book->category->name : 'لا يوجد تصنيف' }}</td>
+                            </tr>
+                            {{-- @endif --}}
 
                             @if ($book->authors->count() > 0)
                                 <tr>
@@ -64,12 +64,12 @@
                                 </tr>
                             @endif
 
-                            @if ($book->publisher)
-                                <tr>
-                                    <th>الناشر</th>
-                                    <td>{{ $book->publisher->name }}</td>
-                                </tr>
-                            @endif
+                            {{-- @if ($book->publisher) --}}
+                            <tr>
+                                <th>الناشر</th>
+                                <td>{{ $book->publisher != null ? $book->publisher->name : 'لا يوجد ناشر' }}</td>
+                            </tr>
+                            {{-- @endif --}}
 
                             @if ($book->description)
                                 <tr>
@@ -100,6 +100,10 @@
                                 <td>{{ $book->price }} $</td>
                             </tr>
                         </table>
+
+                        <a class="btn btn-info btn-sm" href="{{ route('books.edit', $book) }}"><i class="fa fa-edit"></i>
+                            تعديل</a>
+
                     </div>
                 </div>
             </div>
