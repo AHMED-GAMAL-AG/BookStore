@@ -10,6 +10,8 @@
 @endsection
 
 @section('content')
+    <a href="{{ route('books.create') }}" class="btn btn-primary"><i class="fas fa-plus">أضف كتاباً جديداً</i></a>
+    <hr>
     <div class="row">
         <table id="books-table" class="table table-striped table-bordered text-right" width="100%" cellspacing="0">
             <thead>

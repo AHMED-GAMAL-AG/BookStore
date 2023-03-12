@@ -2,11 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Author;
 use App\Models\Book;
+use App\Models\Category;
+use App\Models\Publisher;
 use Illuminate\Http\Request;
+use App\Traits\imageUploadTrait;
 
 class BooksController extends Controller
 {
+
+    use imageUploadTrait;
+
     /**
      * Display a listing of the resource.
      */
@@ -22,7 +29,11 @@ class BooksController extends Controller
      */
     public function create()
     {
-        //
+        $authors = Author::all();
+        $categories = Category::all();
+        $publishers = Publisher::all();
+
+        return view('admin.books.create', compact('authors', 'categories', 'publishers'));
     }
 
     /**
@@ -30,7 +41,43 @@ class BooksController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'title' => 'required',
+            'isbn' => 'required|alpha_num|unique:books,isbn',
+            'cover_image' => 'image|required',
+            'category' => 'nullable',
+            'authors' => 'nullable',
+            'publisher' => 'nullable',
+            'description' => 'nullable',
+            'publish_year' => 'numeric|nullable',
+            'number_of_pages' => 'numeric|required',
+            'number_of_copies' => 'numeric|required',
+            'price' => 'numeric|required',
+        ]);
+
+        $book = new Book;
+
+        $book->title = $request->title;
+        $book->cover_image = $this->uploadImage($request->cover_image); // to resize the image defined in app/traits/imageUploadTrait.php
+        $book->isbn = $request->isbn;
+        $book->category_id = $request->category;
+        $book->publisher_id = $request->publisher;
+        $book->description = $request->description;
+        $book->publish_year = $request->publish_year;
+        $book->number_of_pages = $request->number_of_pages;
+        $book->number_of_copies = $request->number_of_copies;
+        $book->price = $request->price;
+
+        $book->save();
+
+        // attach() connect two models with each other having many to many relation
+        $book->authors()->attach($request->authors);
+
+        // 'flash_message' is the 'flash_message' used in default.blade.php @if (Session::has('flash_message'))
+        // session is a helper to manage session variables
+        session()->flash('flash_message' , 'تمت إضافة الكتاب بنجاح');
+
+        //return redirect(route('books.show')); // show the book details
     }
 
     /**

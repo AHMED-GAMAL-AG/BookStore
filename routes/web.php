@@ -51,3 +51,5 @@ Route::get('/admin', function () {
 Route::get('/admin', [AdminsController::class, 'index'])->name('admin.index');
 
 Route::get('/admin/books', [BooksController::class, 'index'])->name('books.index'); // show a table with all the books to the admin
+Route::get('/admin/books/create', [BooksController::class, 'create'])->name('books.create'); // to show add book form for admin
+Route::post('admin/books', [BooksController::class, 'store'])->name('books.store'); // to submit the add book form
