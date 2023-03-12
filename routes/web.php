@@ -28,6 +28,8 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
 Route::get('/', [GalleryController::class, 'index'])->name('gallery.index');
 Route::get('/search', [GalleryController::class, 'search'])->name('search');
 
+Route::get('/book{book}', [BooksController::class, 'details'])->name('book.details'); // the {book} is send from the gallery view in the href
+
 Route::get('/categories', [CategoriesController::class, 'list'])->name('gallery.categories.index');
 Route::get('/categories/search', [CategoriesController::class, 'search'])->name('gallery.categories.search');
 Route::get('/categories/{category}', [CategoriesController::class, 'results'])->name('gallery.categories.show'); // the {category} is send from the categories.index view in the href
@@ -47,11 +49,4 @@ Route::get('/admin', function () {
 
 Route::get('/admin', [AdminsController::class, 'index'])->name('admin.index');
 
-Route::get('/book{book}', [BooksController::class, 'details'])->name('book.details'); // the {book} is send from the gallery view in the href
-
-Route::get('/admin/books', [BooksController::class, 'index'])->name('books.index'); // show a table with all the books to the admin
-Route::get('/admin/books/create', [BooksController::class, 'create'])->name('books.create'); // to show add book form for admin
-Route::post('admin/books', [BooksController::class, 'store'])->name('books.store'); // to submit the add book form
-Route::get('admin/books/{book}', [BooksController::class, 'show'])->name('books.show'); // to show the book details for admin
-Route::get('admin/books/{book}/edit', [BooksController::class, 'edit'])->name('books.edit'); // to show the book details for admin
-Route::patch('admin/books/{book}', [BooksController::class, 'update'])->name('books.update'); // to show the book details for admin
+Route::resource('/admin/books', BooksController::class);

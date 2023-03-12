@@ -44,7 +44,15 @@
                         <td>{{ $book->publisher != null ? $book->publisher->name : 'لا يوجد ناشر' }}</td>
                         <td>{{ $book->price }} $</td>
                         <td>
-                            <a class="btn btn-info btn-sm" href="{{ route('books.edit', $book) }}"><i class="fa fa-edit"></i> تعديل</a>
+                            <a class="btn btn-info btn-sm" href="{{ route('books.edit', $book) }}"><i
+                                    class="fa fa-edit"></i> تعديل</a>
+                            <form action="{{ route('books.destroy', $book) }}" method="post" class="d-inline-block">
+                                @csrf
+                                @method('delete')
+                                <button type="submit" class="btn btn-danger btn-sm"
+                                    onclick="return confirm('{{ __('Are you sure?') }}')"> <i class="fa fa-trash"></i>
+                                    {{ __('Delete') }} </button>
+                            </form>
                         </td>
                     </tr>
                 @endforeach

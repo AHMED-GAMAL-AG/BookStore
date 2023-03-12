@@ -136,7 +136,7 @@ class BooksController extends Controller
 
         // because of the isbn unique problem if the isbn is edited do validation else ignore
         if ($book->isDirty('isbn')) {
-            $this->validate($request , [
+            $this->validate($request, [
                 'isbn' => 'required|alpha_num|unique:books,isbn',
             ]);
         }
@@ -159,7 +159,12 @@ class BooksController extends Controller
      */
     public function destroy(Book $book)
     {
-        //
+        Storage::disk('public')->delete($book->cover_image);
+        $book->delete();
+
+        session()->flash('flash_message', 'تم حذف الكتاب بنجاح');
+
+        return redirect(route('books.index'));
     }
 
     public function details(Book $book) // show the book details when clicked by the user
