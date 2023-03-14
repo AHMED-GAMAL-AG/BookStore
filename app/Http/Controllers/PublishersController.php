@@ -75,7 +75,7 @@ class PublishersController extends Controller
         $publisher->address = $request->address;
         $publisher->save();
 
-        session()->flash('flash_message', __('تم تعديل الناشر بنجاح'));
+        session()->flash('flash_message', __('تم تعديل بيانات الناشر بنجاح'));
 
         return redirect(route('publishers.index'));
     }

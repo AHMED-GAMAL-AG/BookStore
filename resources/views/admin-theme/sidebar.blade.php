@@ -32,7 +32,7 @@
 
         <!-- Nav Item - Utilities Collapse Menu -->
         <li class="nav-item {{ request()->is('admin/categories*') ? 'active' : '' }}">
-            <a class="nav-link text-right" href="{{route('categories.index')}}">
+            <a class="nav-link text-right" href="{{ route('categories.index') }}">
                 <i class="fas fa-folder"></i>
                 <span>{{ __('Categories') }}</span>
             </a>
@@ -40,7 +40,7 @@
 
         <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item {{ request()->is('admin/authors*') ? 'active' : '' }}">
-            <a class="nav-link text-right" href="#">
+            <a class="nav-link text-right" href="{{ route('authors.index') }}">
                 <i class="fas fa-pen-fancy"></i>
                 <span>{{ __('Authors') }}</span>
             </a>
@@ -48,7 +48,7 @@
 
         <!-- Nav Item - Charts -->
         <li class="nav-item {{ request()->is('admin/publishers*') ? 'active' : '' }}">
-            <a class="nav-link text-right" href="{{route('publishers.index')}}">
+            <a class="nav-link text-right" href="{{ route('publishers.index') }}">
                 <i class="fas fa-table"></i>
                 <span>{{ __('Publishers') }}</span></a>
         </li>

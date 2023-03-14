@@ -12,7 +12,9 @@ class AuthorsController extends Controller
      */
     public function index()
     {
-        //
+        $authors = Author::all();
+
+        return view('admin.authors.index', compact('authors'));
     }
 
     /**
@@ -20,7 +22,7 @@ class AuthorsController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.authors.create');
     }
 
     /**
@@ -28,7 +30,19 @@ class AuthorsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'description' => 'nullable',
+        ]);
+
+        $author = new Author;
+        $author->name = $request->name;
+        $author->description = $request->description;
+        $author->save();
+
+        session()->flash('flash_message', __('تمت إضافة المؤلف بنجاح'));
+
+        return redirect(route('authors.index'));
     }
 
     /**
@@ -44,7 +58,7 @@ class AuthorsController extends Controller
      */
     public function edit(Author $author)
     {
-        //
+        return view('admin.authors.edit', compact('author'));
     }
 
     /**
@@ -52,7 +66,18 @@ class AuthorsController extends Controller
      */
     public function update(Request $request, Author $author)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'description' => 'nullable',
+        ]);
+
+        $author->name = $request->name;
+        $author->description = $request->description;
+        $author->save();
+
+        session()->flash('flash_message', __('تم تعديل بيانات المؤلف بنجاح'));
+
+        return redirect(route('authors.index'));
     }
 
     /**
@@ -60,7 +85,11 @@ class AuthorsController extends Controller
      */
     public function destroy(Author $author)
     {
-        //
+        $author->delete();
+
+        session()->flash('flash_message', __('تم حذف المؤلف بنجاح'));
+
+        return redirect(route('authors.index'));
     }
 
     public function results(Author $author) // get all the books by this author

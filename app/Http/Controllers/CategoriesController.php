@@ -75,7 +75,7 @@ class CategoriesController extends Controller
         $category->description = $request->description;
         $category->save();
 
-        session()->flash('flash_message', __('تم تعديل التصنيف بنجاح'));
+        session()->flash('flash_message', __('تم تعديل بيانات التصنيف بنجاح'));
 
         return redirect(route('categories.index'));
     }
