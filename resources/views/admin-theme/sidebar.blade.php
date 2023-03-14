@@ -48,7 +48,7 @@
 
         <!-- Nav Item - Charts -->
         <li class="nav-item {{ request()->is('admin/publishers*') ? 'active' : '' }}">
-            <a class="nav-link text-right" href="#">
+            <a class="nav-link text-right" href="{{route('publishers.index')}}">
                 <i class="fas fa-table"></i>
                 <span>{{ __('Publishers') }}</span></a>
         </li>
