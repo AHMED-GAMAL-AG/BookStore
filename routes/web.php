@@ -6,6 +6,7 @@ use App\Http\Controllers\BooksController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\PublishersController;
+use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -51,4 +52,5 @@ Route::prefix('/admin')->middleware('can:update-books')->group(function () {
     Route::resource('/categories', CategoriesController::class);
     Route::resource('/publishers', PublishersController::class);
     Route::resource('/authors', AuthorsController::class);
+    Route::resource('/users', UsersController::class)->middleware('can:update-users'); // only super admin can update-users
 });

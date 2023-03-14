@@ -12,7 +12,9 @@ class UsersController extends Controller
      */
     public function index()
     {
-        //
+        $users = User::all();
+
+        return view('admin.users.index', compact('users'));
     }
 
     /**
@@ -20,7 +22,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.users.create');
     }
 
     /**
@@ -44,7 +46,7 @@ class UsersController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        return view('admin.users.edit', compact('user'));
     }
 
     /**
@@ -52,7 +54,18 @@ class UsersController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+
+        $this->validate($request, [
+            'administration_level' => 'required',
+        ]);
+
+        $user->administration_level = $request->administration_level;
+        $user->save();
+
+        session()->flash('flash_message', __('تم تعديل صلاحيات المستخدم بنجاح'));
+
+
+        return redirect(route('users.index'));
     }
 
     /**
@@ -60,6 +73,10 @@ class UsersController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $user->delete();
+
+        session()->flash('flash_message', __('تم حذف المستخدم بنجاح'));
+
+        return redirect(route('users.index'));
     }
 }

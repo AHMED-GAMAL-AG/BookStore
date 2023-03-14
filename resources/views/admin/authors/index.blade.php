@@ -36,7 +36,7 @@
                                     @method('delete')
                                     @csrf
                                     <button type="submit" class="btn btn-danger btn-sm"
-                                        onclick="return confirm('هل أنت متأكد؟')"><i class="fa fa-trash"></i>{{ __('Delete') }}</button>
+                                        onclick="return confirm('Are you sure?')"><i class="fa fa-trash"></i>{{ __('Delete') }}</button>
                                 </form>
                             </td>
                         </tr>
