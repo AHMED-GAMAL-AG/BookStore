@@ -32,7 +32,7 @@
 
         <!-- Nav Item - Utilities Collapse Menu -->
         <li class="nav-item {{ request()->is('admin/categories*') ? 'active' : '' }}">
-            <a class="nav-link text-right" href="#">
+            <a class="nav-link text-right" href="{{route('categories.index')}}">
                 <i class="fas fa-folder"></i>
                 <span>{{ __('Categories') }}</span>
             </a>

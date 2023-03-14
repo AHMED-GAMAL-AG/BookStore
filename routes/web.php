@@ -42,11 +42,9 @@ Route::get('/authors', [AuthorsController::class, 'list'])->name('gallery.author
 Route::get('/authors/search', [AuthorsController::class, 'search'])->name('gallery.authors.search');
 Route::get('/authors/{author}', [AuthorsController::class, 'results'])->name('gallery.authors.show'); // the {author} is send from the authors.index view in the href
 
-Route::get('/admin', function () {
-    return view('admin-theme.default');
-});
-
 
 Route::get('/admin', [AdminsController::class, 'index'])->name('admin.index');
 
 Route::resource('/admin/books', BooksController::class);
+
+Route::resource('/admin/categories', CategoriesController::class);
