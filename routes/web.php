@@ -43,12 +43,12 @@ Route::get('/authors/search', [AuthorsController::class, 'search'])->name('galle
 Route::get('/authors/{author}', [AuthorsController::class, 'results'])->name('gallery.authors.show'); // the {author} is send from the authors.index view in the href
 
 
-Route::get('/admin', [AdminsController::class, 'index'])->name('admin.index');
 
-Route::resource('/admin/books', BooksController::class);
-
-Route::resource('/admin/categories', CategoriesController::class);
-
-Route::resource('/admin/publishers', PublishersController::class);
-
-Route::resource('/admin/authors', AuthorsController::class);
+// delete the /admin form all the route as it is in the prefix('/admin') instead
+Route::prefix('/admin')->middleware('can:update-books')->group(function () {
+    Route::get('/', [AdminsController::class, 'index'])->name('admin.index')->middleware('can:update-books');
+    Route::resource('/books', BooksController::class);
+    Route::resource('/categories', CategoriesController::class);
+    Route::resource('/publishers', PublishersController::class);
+    Route::resource('/authors', AuthorsController::class);
+});
