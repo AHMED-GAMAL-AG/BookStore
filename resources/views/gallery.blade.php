@@ -1,7 +1,6 @@
 @extends('layouts.main')
 
 
-{{-- for css --}}
 @section('head')
     <style>
         .card .card-body .card-title {
@@ -13,9 +12,8 @@
 
 @section('content')
     <div class="container">
-        {{-- Search --}}
         <div class="row">
-            <form action="{{ route('search') }}" method="get">
+            <form action="{{ route('search') }}" method="GET">
                 <div class="row d-flex justify-content-center">
                     <input type="text" class="col-3 mx-sm-3 mb-2" name="term" placeholder="ابحث عن كتاب...">
                     <button type="submit" class="col-1 btn btn-secondary bg-secondary mb-2">ابحث</button>
@@ -23,10 +21,8 @@
             </form>
         </div>
         <hr>
-
         <h3 class="my-3">{{ $title }}</h3>
 
-        {{-- Books --}}
         <div class="mt-50 mb-50">
             <div class="row">
                 @if ($books->count())
@@ -38,19 +34,15 @@
                                         <div class="card-img-actions">
                                             <a href="{{ route('book.details', $book) }}">
                                                 <img src="{{ asset('storage/' . $book->cover_image) }}"
-                                                    class="card-img img-fluid" width="96" height="350"
-                                                    alt="{{ $book->title }}">
+                                                    class="card-img img-fluid" width="96" height="350" alt="">
                                             </a>
                                         </div>
                                     </div>
                                     <div class="card-body bg-light text-center">
                                         <div class="mb-2">
-                                            <h6 class="font-weight-semibold card-title mb-2">
-                                                <a href="{{ route('book.details', $book) }}" class="text-default mb-0"
-                                                    data-abc="true">
-                                                    {{ $book->title }}
-                                                </a>
-                                            </h6>
+                                            <h6 class="font-weight-semibold card-title mb-2"> <a
+                                                    href="{{ route('book.details', $book) }}" class="text-default mb-0"
+                                                    data-abc="true">{{ $book->title }}</a> </h6>
                                             <a href="{{ route('gallery.categories.show', $book->category) }}"
                                                 class="text-muted" data-abc="true">
                                                 @if ($book->category != null)
@@ -60,12 +52,26 @@
                                         </div>
                                         <h3 class="mb-0 font-weight-semibold">{{ $book->price }} $</h3>
                                         <div>
-                                            <i class="fa fa-star star"></i>
-                                            <i class="fa fa-star star"></i>
-                                            <i class="fa fa-star star"></i>
-                                            <i class="fa fa-star star"></i>
+                                            {{-- display the stars above each others is and hide the unrated stars --}}
+                                            <span class="score">
+                                                <div class="score-wrap">
+                                                    <span class="stars-active" style="width:{{ $book->rate() * 20 }}%">
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                    </span>
+                                                    <span class="stars-inactive">
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                    </span>
+                                                </div>
+                                            </span>
                                         </div>
-                                        <div class="text-muted mb-3">34 reviews</div>
                                     </div>
                                 </div>
                             </div>
@@ -79,5 +85,6 @@
             </div>
         </div>
         {{ $books->links() }}
+    </div>
     </div>
 @endsection

@@ -67,4 +67,19 @@ class User extends Authenticatable
     {
         return $this->administration_level > 1 ? true : false; // 0 normal user , 1 admin , 2 super admin
     }
+
+    public function ratings()
+    {
+        return $this->hasMany(Rating::class);
+    }
+
+    public function rated(Book $book) // check if a book is rated
+    {
+        return $this->ratings->where('book_id', $book->id)->isNotEmpty();
+    }
+
+    public function bookRating(Book $book) // get a user rating on a book
+    {
+        return $this->rated($book) ? $this->ratings->where('book_id', $book->id)->first() : null;
+    }
 }

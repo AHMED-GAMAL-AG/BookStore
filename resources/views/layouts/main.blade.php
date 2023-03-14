@@ -18,7 +18,80 @@
     <style>
         body {
             font-family: 'Cairo', sans-serif;
-            background-color: #f0f0f0
+            background-color: #f0f0f0;
+        }
+
+        .bg-cart {
+            background-color: #ffc107;
+            color: #fff
+        }
+
+        .score {
+            display: block;
+            font-size: 16px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .score-wrap {
+            display: inline-block;
+            position: relative;
+            height: 19px;
+        }
+
+        .score .stars-active {
+            color: #FFCA00;
+            position: relative;
+            z-index: 10;
+            display: block;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .score .stars-inactive {
+            color: lightgrey;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .rating {
+            overflow: hidden;
+            display: inline-block;
+            position: relative;
+            font-size: 20px;
+        }
+
+        .rating-star {
+            padding: 0 5px;
+            margin: 0;
+            cursor: pointer;
+            display: block;
+            float: left;
+        }
+
+        .rating-star:after {
+            position: relative;
+            font-family: "Font Awesome 5 Free";
+            content: '\f005';
+            color: lightgrey;
+        }
+
+        .rating-star.checked~.rating-star:after,
+        .rating-star.checked:after {
+            content: '\f005';
+            color: #FFCA00;
+        }
+
+        .rating:hover .rating-star:after {
+            content: '\f005';
+            color: lightgrey;
+        }
+
+        .rating-star:hover~.rating-star:after,
+        .rating .rating-star:hover:after {
+            content: '\f005';
+            color: #FFCA00;
         }
     </style>
 
@@ -87,8 +160,7 @@
                                 <div class="dropdown-menu dropdown-menu-left px-2 text-right mt-2">
 
                                     @can('update-books')
-
-                                    <a href="{{route('admin.index')}}" class="dropdown-item">{{__('Dashboard')}}</a>
+                                        <a href="{{ route('admin.index') }}" class="dropdown-item">{{ __('Dashboard') }}</a>
                                     @endcan
 
                                     <div class="pt-4 pb-1 border-t border-gray-200">
