@@ -6,6 +6,7 @@ use App\Models\Author;
 use App\Models\Book;
 use App\Models\Category;
 use App\Models\Publisher;
+use App\Models\Rating;
 use Illuminate\Http\Request;
 use App\Traits\imageUploadTrait;
 use Illuminate\Support\Facades\Storage;
@@ -170,5 +171,22 @@ class BooksController extends Controller
     public function details(Book $book) // show the book details when clicked by the user
     {
         return view('books.details', compact('book'));
+    }
+
+    // book is send form uri in the Route
+    public function rate(Request $request, Book $book)
+    {
+        // check if the user has rated this book before
+        if (auth()->user()->rated($book)) {
+            $rating = Rating::where(['user_id' => auth()->user()->id, 'book_id' => $book->id]);
+            $rating->value = $request->value;
+            $rating->save();
+        } else {
+            $rating = new Rating;
+            $rating->user_id = auth()->user()->id;
+            $rating->book_id = $request->id;
+            $rating->value = $request->value;
+        }
+        return back();
     }
 }

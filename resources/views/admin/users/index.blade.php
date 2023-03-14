@@ -43,7 +43,6 @@
                                     <button type="submit" class="btn btn-info btn-sm"><i class="fa fa-edit"></i>
                                         {{ __('Edit') }}</button>
                                 </form>
-
                                 <form method="POST" action="{{ route('users.destroy', $user) }}"
                                     style="display:inline-block">
                                     @method('delete')

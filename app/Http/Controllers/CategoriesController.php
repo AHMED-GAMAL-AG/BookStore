@@ -106,7 +106,7 @@ class CategoriesController extends Controller
         $categories = Category::all()->sortBy('name');
         $title = 'التصنيفات';
 
-        return view(route('categories.index'), compact('categories', 'title'));
+        return view('categories.index', compact('categories', 'title'));
     }
 
     public function search(Request $request)
