@@ -82,4 +82,10 @@ class User extends Authenticatable
     {
         return $this->rated($book) ? $this->ratings->where('book_id', $book->id)->first() : null;
     }
+
+    public function booksInCart()
+    {
+        //  user_id, book_id these are the columns that link the users and books tables in the pivot table
+        return $this->belongsToMany(Book::class)->withPivot('number_of_copies', 'bought', 'price')->wherePivot('bought', false); // the relation between tha tables is happens when the user didn't buy if bought is true the cart will be cleared
+    }
 }

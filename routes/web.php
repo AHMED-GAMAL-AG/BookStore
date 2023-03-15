@@ -3,6 +3,8 @@
 use App\Http\Controllers\AdminsController;
 use App\Http\Controllers\AuthorsController;
 use App\Http\Controllers\BooksController;
+use App\Http\Controllers\CartConroller;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\PublishersController;
@@ -29,7 +31,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
 Route::get('/', [GalleryController::class, 'index'])->name('gallery.index');
 Route::get('/search', [GalleryController::class, 'search'])->name('search');
 
-Route::get('/book{book}', [BooksController::class, 'details'])->name('book.details'); // the {book} is send from the gallery view in the href
+Route::get('/book/{book}', [BooksController::class, 'details'])->name('book.details'); // the {book} is send from the gallery view in the href
 Route::post('/book/{book}/rate', [BooksController::class, 'rate'])->name('book.rate');
 
 Route::get('/categories', [CategoriesController::class, 'list'])->name('gallery.categories.index');
@@ -55,3 +57,5 @@ Route::prefix('/admin')->middleware('can:update-books')->group(function () {
     Route::resource('/authors', AuthorsController::class);
     Route::resource('/users', UsersController::class)->middleware('can:update-users'); // only super admin can update-users
 });
+
+Route::post('/cart', [CartController::class, 'addToCart'])->name('cart.add');

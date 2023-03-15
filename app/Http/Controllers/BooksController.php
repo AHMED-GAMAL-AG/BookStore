@@ -178,14 +178,15 @@ class BooksController extends Controller
     {
         // check if the user has rated this book before
         if (auth()->user()->rated($book)) {
-            $rating = Rating::where(['user_id' => auth()->user()->id, 'book_id' => $book->id]);
+            $rating = Rating::where(['user_id' => auth()->user()->id, 'book_id' => $book->id])->first();
             $rating->value = $request->value;
             $rating->save();
         } else {
             $rating = new Rating;
             $rating->user_id = auth()->user()->id;
-            $rating->book_id = $request->id;
+            $rating->book_id = $book->id;
             $rating->value = $request->value;
+            $rating->save();
         }
         return back();
     }

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="csrf-token" content="{{ csrf_token() }}" />
+    {{-- <meta name="csrf-token" content="{{ csrf_token() }}" /> --}}
     <title>مكتبة أحمد</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -102,6 +102,7 @@
 <body dir="rtl" style="text-align: right">
 
     <div>
+        {{-- nav bar --}}
         <nav class="navbar navbar-expand-lg navbar-light bg-white">
             <div class="container-fluid">
                 <a class="navbar-brand" href="{{ url('/') }}">مكتبة أحمد</a>
@@ -110,8 +111,22 @@
                     aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mx-auto">
+                        @auth
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    @if (Auth::user()->booksInCart()->count() > 0)
+                                        <span class="badge bg-secondary">{{ Auth::user()->booksInCart()->count() }}</span>
+                                    @else
+                                        <span class="badge bg-secondary">0</span>
+                                    @endif
+                                    العربة
+                                    <i class="fas fa-shopping-cart"></i>
+                                </a>
+                            </li>
+                        @endauth
                         <li class="nav-item">
                             <a href="{{ route('gallery.categories.index') }}" class="nav-link">
                                 التصنيفات <i class="fas fa-list"></i>
