@@ -116,7 +116,7 @@
                     <ul class="navbar-nav mx-auto">
                         @auth
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href="{{ route('cart.view') }}">
                                     @if (Auth::user()->booksInCart()->count() > 0)
                                         <span class="badge bg-secondary">{{ Auth::user()->booksInCart()->count() }}</span>
                                     @else

@@ -37,4 +37,28 @@ class CartController extends Controller
 
         return response()->json(['number_of_products' => $number_of_products]); // send to the ajax request
     }
+
+    public function viewCart()
+    {
+        $items = auth()->user()->booksInCart;
+        return view('cart', compact('items'));
+    }
+
+    public function removeOne(Book $book) // remove one item of this book in cart
+    {
+        $old_quantity = auth()->user()->booksInCart()->where('book_id', $book->id)->first()->pivot->number_of_copies; // pivot is the pivot table book_user to access number_of_copies
+
+        if ($old_quantity > 1) {
+            auth()->user()->booksInCart()->updateExistingPivot($book->id, ['number_of_copies' => --$old_quantity]);
+        } else { // if their is only one item of the book then remove it from cart
+            auth()->user()->booksInCart()->detach($book->id);
+        }
+        return redirect()->back();
+    }
+
+    public function removeAll(Book $book)
+    {
+        auth()->user()->booksInCart()->detach($book->id);
+        return redirect()->back();
+    }
 }
