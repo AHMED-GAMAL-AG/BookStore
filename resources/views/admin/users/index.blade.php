@@ -62,6 +62,11 @@
                     @endforeach
                 </tbody>
             </table>
+            @error('administration_level')
+                <span class="invalid-feedback d-block" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
         </div>
     </div>
 @endsection

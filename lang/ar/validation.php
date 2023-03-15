@@ -141,6 +141,7 @@ return [
     'url'                  => 'صيغة رابط حقل :attribute غير صحيحة.',
     'uuid'                 => 'حقل :attribute يجب أن يكون بصيغة UUID سليمة.',
     'attributes'           => [
+        'administration_level'     => 'مستوى الإدارة',
         'address'                  => 'العنوان',
         'age'                      => 'العمر',
         'amount'                   => 'الكمية',

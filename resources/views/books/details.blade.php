@@ -150,7 +150,7 @@
             var submitStars = $(this).attr('data-value');
             $.ajax({
                 type: 'post',
-                url: {{ $book->id }} + '/rate',
+                url: '/book/' +{{ $book->id }} + '/rate',
                 data: {
                     '_token': $('meta[name="csrf-token"]').attr('content'),
                     'value': submitStars
@@ -164,5 +164,4 @@
             });
         });
     </script>
-
 @endsection
