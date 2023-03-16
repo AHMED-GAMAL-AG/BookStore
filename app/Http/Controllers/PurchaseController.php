@@ -83,6 +83,39 @@ class PurchaseController extends Controller
             $total += $book->price * $book->pivot->number_of_copies; // pivot to get number of copies in cart "the pivot table"
         }
 
-        return view('credit.checkout', compact('total' , 'intent'));
+        return view('credit.checkout', compact('total', 'intent'));
+    }
+
+    public function purchase(Request $request)
+    {
+        $user = $request->user();
+        $payment_method = $request->input('payment_method'); // contains card_holder_name and card type
+
+        $user_id = auth()->user()->id;
+        $books = User::find($user_id)->booksInCart;
+        $total = 0;
+
+        foreach ($books as $book) {
+            $total += $book->price * $book->pivot->number_of_copies; // pivot to get number of copies in cart "the pivot table"
+        }
+
+        try {
+            $user->createOrGetStripeCustomer(); // create a customer
+            $user->updateDefaultPaymentMethod($payment_method); // set visa or master card
+            $user->charge($total * 100, $payment_method); // *method because stripe works with cent
+
+        } catch (\Exception $exception) {
+            return back()->with('حصل خطأ أثناء شراء المنتج، الرجاء التأكد من معلومات البطاقة', $exception->getMessage());
+        }
+
+        // save the book info when purchase it to show it later in the payments page
+        foreach ($books as $book) {
+            $book_price = $book->price;
+            $purchase_time = Carbon::now();
+            $user->booksInCart()->updateExistingPivot($book->id, ['bought' => true, 'price' => $book_price, 'created_at' => $purchase_time]); // update the book_user table (cart)
+            $book->save();
+        }
+
+        return redirect('/cart')->with('message' , 'تم شراء المنتج بنجاح');
     }
 }

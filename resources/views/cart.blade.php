@@ -4,9 +4,11 @@
     <div class="container">
 
         <div class="row justify-content-center">
+            {{-- for paypal --}}
             <div id="success" style="display:none" class="col-md-8 text-center h3 p-4 bg-success text-light rounded">
                 {{ __('تمت عملية الشراء بنجاح') }}
             </div>
+            {{-- for stripe credit card --}}
             @if (session('message'))
                 <div class="col-md-8 text-center h3 p-4 bg-success text-light rounded">{{ __('تمت عملية الشراء بنجاح') }}
                 </div>
