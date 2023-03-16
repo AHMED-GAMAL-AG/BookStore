@@ -204,8 +204,8 @@
                     _token: token
                 },
                 success: function(data) {
-                    $('span.badge').text(data.num_of_product);
-                    toastr.success("@php echo __('تم إضافة الكتاب بنجاح') @endphp")
+                    $('span.badge').text(data.number_of_products);
+                    toastr.success("@php echo __('تم إضافة الكتاب بنجاح') @endphp");
                 },
                 error: function() {
                     alert("@php echo __('حدث خطأ ما') @endphp");

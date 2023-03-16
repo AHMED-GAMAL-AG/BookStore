@@ -3,7 +3,6 @@
 use App\Http\Controllers\AdminsController;
 use App\Http\Controllers\AuthorsController;
 use App\Http\Controllers\BooksController;
-use App\Http\Controllers\CartConroller;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\GalleryController;
