@@ -92,43 +92,33 @@
 
     <script>
         paypal.Buttons({
-            // Order is created on the server and the order id is returned
-            createOrder() {
-                return fetch("/my-server/create-paypal-order", {
-                        method: "post",
-                        // use the "body" param to optionally pass additional order information
-                        // like product skus and quantities
-                        body: JSON.stringify({
-                            cart: [{
-                                sku: "YOUR_PRODUCT_STOCK_KEEPING_UNIT",
-                                quantity: "YOUR_PRODUCT_QUANTITY",
-                            }, ],
-                        }),
+            // Sets up the transaction when a payment button is clicked
+            createOrder: (data, actions) => {
+                return fetch('/api/paypal/create-payment', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        'userId': "{{ auth()->user()->id }}",
                     })
-                    .then((response) => response.json())
-                    .then((order) => order.id);
+                }).then(function(response) {
+                    return response.json();
+                }).then(function(orderData) {
+                    return orderData.id;
+                });
             },
-            // Finalize the transaction on the server after payer approval
-            onApprove(data) {
-                return fetch("/my-server/capture-paypal-order", {
-                        method: "post",
-                        body: JSON.stringify({
-                            orderID: data.orderID
-                        })
+            // Finalize the transaction after payer approval
+            onApprove: (data, actions) => {
+                return fetch('/api/paypal/execute-payment', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        orderId: data.orderID,
+                        userId: "{{ auth()->user()->id }}",
                     })
-                    .then((response) => response.json())
-                    .then((orderData) => {
-                        // Successful capture! For dev/demo purposes:
-                        console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
-                        const transaction = orderData.purchase_units[0].payments.captures[0];
-                        alert(
-                            `Transaction ${transaction.status}: ${transaction.id}\n\nSee console for all available details`
-                        );
-                        // When ready to go live, remove the alert and show a success message within this page. For example:
-                        // const element = document.getElementById('paypal-button-container');
-                        // element.innerHTML = '<h3>Thank you for your payment!</h3>';
-                        // Or go to another URL:  window.location.href = 'thank_you.html';
-                    });
+                }).then(function(response) {
+                    return response.json();
+                }).then(function(orderData) {
+                    $('#success').slideDown(200);
+                    $('.card-body').slideUp(0);
+                });
             }
         }).render('#paypal-button-container');
     </script>
