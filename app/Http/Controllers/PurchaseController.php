@@ -22,7 +22,7 @@ class PurchaseController extends Controller
     }
 
 
-    public function cratePayment(Request $request)
+    public function cratePayment(Request $request) // for paypal
     {
         // 'userId': "{{ auth()->user()->id }}", is send from the cart.blade.php receive it in the $request
         $data = json_decode($request->getContent(), true); // receive the userId // decode to convert it to a php variable , tue makes it an associative array
@@ -31,7 +31,7 @@ class PurchaseController extends Controller
         $total = 0;
 
         foreach ($books as  $book) {
-            $total += $book->price + $book->pivot->number_of_copies;
+            $total += $book->price + $book->pivot->number_of_copies;  // pivot to get number of copies in cart "the pivot table"
         }
 
         $order = $this->provider->createOrder([
@@ -48,7 +48,7 @@ class PurchaseController extends Controller
         return response()->json($order); // send the response to the .then() in the cart.blade.php
     }
 
-    public function executePayment(Request $request)
+    public function executePayment(Request $request) // for paypal
     {
         // 'userId': "{{ auth()->user()->id }}",  orderId: data.orderID, is send from the cart.blade.php receive it in the $request
         $data = json_decode($request->getContent(), true); // receive the userId  and orderId // decode to convert it to a php variable , tue makes it an associative array
@@ -69,5 +69,20 @@ class PurchaseController extends Controller
         }
 
         return response()->json($result); // send the response to the .then() in the cart.blade.php
+    }
+
+    public function creditCheckout(Request $request)
+    {
+        $intent = auth()->user()->createSetupIntent(); // stripe intent
+
+        $user_id = auth()->user()->id;
+        $books = User::find($user_id)->booksInCart;
+        $total = 0;
+
+        foreach ($books as $book) {
+            $total += $book->price * $book->pivot->number_of_copies; // pivot to get number of copies in cart "the pivot table"
+        }
+
+        return view('credit.checkout', compact('total' , 'intent'));
     }
 }

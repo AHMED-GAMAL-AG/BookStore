@@ -7,6 +7,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\PublishersController;
+use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
@@ -61,3 +62,8 @@ Route::post('/cart', [CartController::class, 'addToCart'])->name('cart.add');
 Route::get('/cart', [CartController::class, 'viewCart'])->name('cart.view');
 Route::post('/remove-one/{book}', [CartController::class, 'removeOne'])->name('cart.remove_one'); // remove one item of this book in cart
 Route::post('/remove-all/{book}', [CartController::class, 'removeAll'])->name('cart.remove_all');
+
+
+// stripe credit card
+Route::get('/checkout', [PurchaseController::class, 'creditCheckout'])->name('credit.checkout');
+Route::post('checkout', [PurchaseController::class, 'purchase'])->name('products.purchase');

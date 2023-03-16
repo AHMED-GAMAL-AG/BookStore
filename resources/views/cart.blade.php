@@ -67,7 +67,7 @@
                             <!-- Set up a container element for paypal button -->
                             <div class="d-inline-block" id="paypal-button-container"></div>
 
-                            <a href="" class="d-inline-block mb-4 float-start btn bg-cart"
+                            <a href="{{ route('credit.checkout') }}" class="d-inline-block mb-4 float-start btn bg-cart"
                                 style="text-decoration:none;">
                                 <span> {{ __('بطاقة ائتمانية') }}</span>
                                 <i class="fas fa-credit-card"></i>

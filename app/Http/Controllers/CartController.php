@@ -61,4 +61,6 @@ class CartController extends Controller
         auth()->user()->booksInCart()->detach($book->id);
         return redirect()->back();
     }
+
+
 }
