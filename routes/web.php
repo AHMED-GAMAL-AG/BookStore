@@ -66,4 +66,4 @@ Route::post('/remove-all/{book}', [CartController::class, 'removeAll'])->name('c
 
 // stripe credit card
 Route::get('/checkout', [PurchaseController::class, 'creditCheckout'])->name('credit.checkout');
-Route::post('checkout', [PurchaseController::class, 'purchase'])->name('products.purchase');
+Route::post('/checkout', [PurchaseController::class, 'purchase'])->name('products.purchase');

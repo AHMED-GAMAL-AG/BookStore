@@ -9,6 +9,7 @@ use App\Models\Publisher;
 use App\Models\Rating;
 use Illuminate\Http\Request;
 use App\Traits\imageUploadTrait;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class BooksController extends Controller
@@ -170,7 +171,12 @@ class BooksController extends Controller
 
     public function details(Book $book) // show the book details when clicked by the user
     {
-        return view('books.details', compact('book'));
+        $book_find = 0;
+        if (Auth::check()) {
+            $book_find = auth()->user()->ratedPurchases()->where('book_id', $book->id)->first(); // if true book_find will be 1 else 0
+        }
+
+        return view('books.details', compact('book', 'book_find'));
     }
 
     // book is send form uri in the Route
