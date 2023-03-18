@@ -75,6 +75,7 @@
     "Users": "المستخدمون",
     "Pay": "دفع",
     "Purchase": "أشتري",
+    "Purchases": "المشتريات",
     "Create API Token": "إنشاء رمز API",
     "API tokens allow third-party services to authenticate with our application on your behalf.": "تسمح رموز API لخدمات الطرف الثالث بالمصادقة مع تطبيقنا نيابة عنك.",
     "Token Name": "اسم الرمز",

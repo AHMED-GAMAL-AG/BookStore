@@ -56,6 +56,7 @@ Route::prefix('/admin')->middleware('can:update-books')->group(function () {
     Route::resource('/publishers', PublishersController::class);
     Route::resource('/authors', AuthorsController::class);
     Route::resource('/users', UsersController::class)->middleware('can:update-users'); // only super admin can update-users
+    Route::get('/all-products', [PurchaseController::class, 'allProducts'])->name('all.products');
 });
 
 Route::post('/cart', [CartController::class, 'addToCart'])->name('cart.add');
@@ -70,3 +71,6 @@ Route::post('/checkout', [PurchaseController::class, 'purchase'])->name('product
 
 
 Route::get('/my-product', [PurchaseController::class, 'myProduct'])->name('my.product');
+
+
+
