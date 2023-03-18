@@ -44,12 +44,15 @@
                         <input type="hidden" name="payment_method" class="payment-method">
                         <input class="StripeElement mb-3" name="card_holder_name" placeholder="Card holder name">
                         <div class="">
-                            <div id="card-element"></div>
+                            <div id="card-element">
+
+                            </div>
                         </div>
                         <div id="card-errors" role="alert"></div>
                         <div class="form-group mt-3">
                             <button type="submit" class="btn bg-cart pay">
-                                {{ __('Pay') }} {{ $total }} $ <span class="icon" hidden><i class="fas fa-sync fa-spin"></i></span>
+                                {{ __('Pay') }} {{ $total }} $ <span class="icon" hidden><i
+                                        class="fas fa-sync fa-spin"></i></span>
                             </button>
                         </div>
                     </form>
@@ -108,7 +111,7 @@
                     $('.payment-method').val(paymentMethod)
                     $('.card-form').submit()
                     $('span.icon').removeAttr('hidden')
-                    $('button.pay').attr('disabled' ,true)
+                    $('button.pay').attr('disabled', true)
                 }
             })
             return false

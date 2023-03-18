@@ -101,8 +101,8 @@
                     body: JSON.stringify({
                         'userId': "{{ auth()->user()->id }}",
                     })
-                }).then(function(response) {
-                    return response.json();
+                }).then(function(res) {
+                    return res.json();
                 }).then(function(orderData) {
                     return orderData.id;
                 });
@@ -115,8 +115,8 @@
                         orderId: data.orderID,
                         userId: "{{ auth()->user()->id }}",
                     })
-                }).then(function(response) {
-                    return response.json();
+                }).then(function(res) {
+                    return res.json();
                 }).then(function(orderData) {
                     $('#success').slideDown(200);
                     $('.card-body').slideUp(0);

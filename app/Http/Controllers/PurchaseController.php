@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\OrderMail;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 // Import the class namespaces first, before using it directly
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
 
@@ -59,6 +61,8 @@ class PurchaseController extends Controller
             $user = User::find($data['userId']);
             $books = $user->booksInCart;
 
+            $this->sendOrderConfirmationMail($books, auth()->user()); // send confirmation mail
+
             // save the book info when purchase it to show it later in the payments page
             foreach ($books as $book) {
                 $book_price = $book->price;
@@ -86,7 +90,7 @@ class PurchaseController extends Controller
         return view('credit.checkout', compact('total', 'intent'));
     }
 
-    public function purchase(Request $request)
+    public function purchase(Request $request) // for stripe credit card
     {
         $user = $request->user();
         $payment_method = $request->input('payment_method'); // contains card_holder_name and card type
@@ -108,6 +112,8 @@ class PurchaseController extends Controller
             return back()->with('حصل خطأ أثناء شراء المنتج، الرجاء التأكد من معلومات البطاقة', $exception->getMessage());
         }
 
+        $this->sendOrderConfirmationMail($books, auth()->user()); // send confirmation mail
+
         // save the book info when purchase it to show it later in the payments page
         foreach ($books as $book) {
             $book_price = $book->price;
@@ -116,6 +122,12 @@ class PurchaseController extends Controller
             $book->save();
         }
 
-        return redirect('/cart')->with('message' , 'تم شراء المنتج بنجاح');
+        return redirect('/cart')->with('message', 'تم شراء المنتج بنجاح');
+    }
+
+    public function sendOrderConfirmationMail($order, $user)
+    {
+        // $order, $user will be sent to the constructor of the OrderMail
+        Mail::to($user->email)->send(new OrderMail($order, $user));
     }
 }
