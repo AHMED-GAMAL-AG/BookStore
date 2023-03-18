@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\OrderMail;
+use App\Models\Book;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -129,5 +130,13 @@ class PurchaseController extends Controller
     {
         // $order, $user will be sent to the constructor of the OrderMail
         Mail::to($user->email)->send(new OrderMail($order, $user));
+    }
+
+    public function myProduct() //
+    {
+        $user_id = auth()->user()->id;
+        $my_books = User::find($user_id)->purchasedProduct;
+
+        return view('books.my-product', compact('my_books'));
     }
 }

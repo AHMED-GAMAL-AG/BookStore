@@ -145,11 +145,13 @@
                             </a>
                         </li>
 
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                مشترياتي <i class="fas fa-basket-shopping"></i>
-                            </a>
-                        </li>
+                        @auth
+                            <li class="nav-item">
+                                <a href="{{route('my.product')}}" class="nav-link">
+                                    مشترياتي <i class="fas fa-basket-shopping"></i>
+                                </a>
+                            </li>
+                        @endauth
                     </ul>
 
                     <ul class="navbar-nav mr-auto">
