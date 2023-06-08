@@ -1,66 +1,97 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+## BookStore
+an e-commerce platform with all essential functionalities with strong administration capabilities, using PayPal and Stripe as payment gateways
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+You can find an installation guide bellow.
 
-## About Laravel
+## Screenshoots
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Show all books on the home page :
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+![image](https://github.com/AHMED-GAMAL-AG/BookStore/assets/76778937/ee9bcac3-dcef-4c77-b781-2facb88fb5a0)
+![image](https://github.com/AHMED-GAMAL-AG/BookStore/assets/76778937/10e5b153-98e2-4cbe-85d2-43f4f978c2a4)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+the user can search for a book :
 
-## Learning Laravel
+![image](https://github.com/AHMED-GAMAL-AG/BookStore/assets/76778937/ae2f2d6a-55f8-4659-a3c2-c42860debb94)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+View book details :
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+![image](https://github.com/AHMED-GAMAL-AG/BookStore/assets/76778937/f4b63b3a-bee9-4ecb-a324-d3da2c0b2756)
+![image](https://github.com/AHMED-GAMAL-AG/BookStore/assets/76778937/254aa206-78cf-4dc2-9ac9-fcee90f330d7)
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Rate a book if purchased it before or change the previous rating :
 
-## Laravel Sponsors
+![image](https://github.com/AHMED-GAMAL-AG/BookStore/assets/76778937/9c786bf3-babc-442b-b2ee-1c93bdef9259)
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+add a book to the cart :
 
-### Premium Partners
+![image](https://github.com/AHMED-GAMAL-AG/BookStore/assets/76778937/c0b3885b-92ba-4098-ac16-2210f0be1a22)
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+The user can remove a book, empty the card pay with any card type using Stripe or PayPal :
 
-## Contributing
+![image](https://github.com/AHMED-GAMAL-AG/BookStore/assets/76778937/ae8d64db-f42c-4814-aae8-3db48f9b41c0)
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Paying with visa card using stripe :
 
-## Code of Conduct
+![image](https://github.com/AHMED-GAMAL-AG/BookStore/assets/76778937/a5bd96cd-ce93-480b-a4e9-34fef1da3f2b)
+![image](https://github.com/AHMED-GAMAL-AG/BookStore/assets/76778937/75161e91-5e18-4bf3-b5e8-18df9bd5a3cf)
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Paying with PayPal :
 
-## Security Vulnerabilities
+![image](https://github.com/AHMED-GAMAL-AG/BookStore/assets/76778937/de17edf9-17e2-498f-9669-20c3bff12284)
+![image](https://github.com/AHMED-GAMAL-AG/BookStore/assets/76778937/81d07338-09d0-4531-afe6-7a208e97c4bc)
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+get a confirmation email after purchase :
 
-## License
+![image](https://github.com/AHMED-GAMAL-AG/BookStore/assets/76778937/2e5ffdc7-be90-475a-801c-e04f0070b65b)
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+The user can see previous orders :
+
+![image](https://github.com/AHMED-GAMAL-AG/BookStore/assets/76778937/05467010-8286-4957-a008-209ee391cd99)
+
+The user can search through categories, authors, and publishers : 
+
+![image](https://github.com/AHMED-GAMAL-AG/BookStore/assets/76778937/f0c0f012-848a-4d71-afdc-fcf83bde69f3)
+![image](https://github.com/AHMED-GAMAL-AG/BookStore/assets/76778937/98355fad-e74d-4e5f-9ee2-ac0c163bac2e)
+
+The admin can see the store statistics:
+
+![image](https://github.com/AHMED-GAMAL-AG/BookStore/assets/76778937/f34e4690-7b3c-4bbd-93ea-892dc50e3244)
+
+The admins can view all books add/edit/delete/search for a book :
+
+![image](https://github.com/AHMED-GAMAL-AG/BookStore/assets/76778937/a32e10b2-7c40-4aaf-8a43-b54a7b1dfa1a)
+
+The admins can view all categories add/edit/delete/search a category :
+
+![image](https://github.com/AHMED-GAMAL-AG/BookStore/assets/76778937/ff1cfdb1-9d8f-4363-93e4-c96943782b4c)
+
+The admins can view all authors add/edit/delete/search an author :
+
+![image](https://github.com/AHMED-GAMAL-AG/BookStore/assets/76778937/f960036d-c8b0-46ac-988c-76f7702ce688)
+
+The admins can view all publishers add/edit/delete/search a publisher :
+
+![image](https://github.com/AHMED-GAMAL-AG/BookStore/assets/76778937/6dba2872-2017-4b08-becb-fe5435ae23d0)
+
+only super admins can view all users add/edit/delete/search a user :
+
+![image](https://github.com/AHMED-GAMAL-AG/BookStore/assets/76778937/7023511e-656c-4601-aa9a-ca706cc7582e)
+![image](https://github.com/AHMED-GAMAL-AG/BookStore/assets/76778937/607246fc-f585-4de1-9916-65f80f7d8b74)
+
+The admin can view all purchases on the website :
+
+![image](https://github.com/AHMED-GAMAL-AG/BookStore/assets/76778937/d5a286fc-f429-4734-b074-c7d5318a1a75)
+
+
+## installation
+
+<ul>
+<li><code>git clone https://github.com/AHMED-GAMAL-AG/BookStore.git</code></li>
+<li><code>Create a .env file and configure the database.</code></li>
+<li><code>composer install</code></li>
+<li><code>npm install</code></li>
+<li><code>php artisan key:generate</code></li>
+<li><code>php artisan migrate --seed</code></li>
+<li><code>php artisan storage:link</code></li>
+</ul>
