@@ -80,6 +80,10 @@
             $('#users-table').DataTable({
                 "language": {
                     "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Arabic.json"
+                },
+                "initComplete": function() {
+                    var table = this.api();
+                    $(table.table().container()).find('.dataTables_filter input').addClass('mr-1'); // add margin to search box
                 }
             });
         });

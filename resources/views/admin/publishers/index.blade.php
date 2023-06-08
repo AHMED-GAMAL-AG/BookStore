@@ -55,6 +55,10 @@
             $('#publishers-table').DataTable({
                 'language': {
                     'url': '//cdn.datatables.net/plug-ins/1.13.3/i18n/ar.json'
+                },
+                "initComplete": function() {
+                    var table = this.api();
+                    $(table.table().container()).find('.dataTables_filter input').addClass('mr-1'); // add margin to search box
                 }
             });
         });

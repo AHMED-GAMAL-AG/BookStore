@@ -27,8 +27,7 @@
                     @foreach ($all_books as $product)
                         <tr>
                             <td>{{ $product->user::find($product->user_id)->name }}</td>
-                            <td><a
-                                    href="{{ route('book.details', $product->book_id) }}">{{ $product->book::find($product->book_id)->title }}</a>
+                            <td><a href="{{ route('book.details', $product->book_id) }}">{{ $product->book::find($product->book_id)->title }}</a>
                             </td>
                             <td>{{ $product->price }}$</td>
                             <td>{{ $product->number_of_copies }}</td>
@@ -51,6 +50,10 @@
             $('#books-table').DataTable({
                 "language": {
                     "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Arabic.json"
+                },
+                "initComplete": function() {
+                    var table = this.api();
+                    $(table.table().container()).find('.dataTables_filter input').addClass('mr-1'); // add margin to search box
                 }
             });
         });

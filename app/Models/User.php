@@ -68,7 +68,7 @@ class User extends Authenticatable
      */
     protected function defaultProfilePhotoUrl() // override default profile photo
     {
-        return 'https://api.dicebear.com/6.x/bottts/svg?seed=' . urlencode($this->name);
+        return 'https://api.dicebear.com/6.x/thumbs/svg?seed=' . urlencode($this->name);
     }
 
     public function isAdmin()

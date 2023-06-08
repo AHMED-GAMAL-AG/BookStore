@@ -10,8 +10,7 @@
 @endsection
 
 @section('content')
-    <a href="{{ route('categories.create') }}" class="btn btn-primary"><i
-            class="fas fa-plus">{{ __('أضف تصنيفاً جديداً') }}</i></a>
+    <a href="{{ route('categories.create') }}" class="btn btn-primary"><i class="fas fa-plus">{{ __('أضف تصنيفاً جديداً') }}</i></a>
     <hr>
     <div class="row">
         <table id="categories-table" class="table table-striped table-bordered text-right" width="100%" cellspacing="0">
@@ -34,8 +33,7 @@
                             <form action="{{ route('categories.destroy', $category) }}" method="post" class="d-inline-block">
                                 @csrf
                                 @method('delete')
-                                <button type="submit" class="btn btn-danger btn-sm"
-                                    onclick="return confirm('{{ __('Are you sure?') }}')"> <i class="fa fa-trash"></i>
+                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('{{ __('Are you sure?') }}')"> <i class="fa fa-trash"></i>
                                     {{ __('Delete') }} </button>
                             </form>
                         </td>
@@ -55,6 +53,10 @@
             $('#categories-table').DataTable({
                 'language': {
                     'url': '//cdn.datatables.net/plug-ins/1.13.3/i18n/ar.json'
+                },
+                "initComplete": function() {
+                    var table = this.api();
+                    $(table.table().container()).find('.dataTables_filter input').addClass('mr-1'); // add margin to search box
                 }
             });
         });
