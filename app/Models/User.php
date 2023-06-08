@@ -61,6 +61,16 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
+    /**
+     * Get the default profile photo URL if no profile photo has been uploaded.
+     *
+     * @return string
+     */
+    protected function defaultProfilePhotoUrl() // override default profile photo
+    {
+        return 'https://api.dicebear.com/6.x/bottts/svg?seed=' . urlencode($this->name);
+    }
+
     public function isAdmin()
     {
         return $this->administration_level > 0 ? true : false; // 0 normal user , 1 admin , 2 super admin

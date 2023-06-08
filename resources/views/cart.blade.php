@@ -43,16 +43,14 @@
                                             <td>{{ $item->pivot->number_of_copies }}</td>
                                             <td>{{ $item->price * $item->pivot->number_of_copies }} $</td>
                                             <td>
-                                                <form style="float:left; margin: auto 5px" method="post"
-                                                    action="{{ route('cart.remove_all', $item->id) }}">
+                                                <form style="float:left; margin: auto 5px" method="post" action="{{ route('cart.remove_all', $item->id) }}">
                                                     @csrf
                                                     <button class="btn btn-outline-danger btn-sm" type="submit">
                                                         {{ __('أزل الكل') }}
                                                     </button>
                                                 </form>
 
-                                                <form style="float:left; margin: auto 5px" method="post"
-                                                    action="{{ route('cart.remove_one', $item->id) }}">
+                                                <form style="float:left; margin: auto 5px" method="post" action="{{ route('cart.remove_one', $item->id) }}">
                                                     @csrf
                                                     <button class="btn btn-outline-warning btn-sm" type="submit">
                                                         {{ __('أزل واحدًا') }}
@@ -69,8 +67,7 @@
                             <!-- Set up a container element for paypal button -->
                             <div class="d-inline-block" id="paypal-button-container"></div>
 
-                            <a href="{{ route('credit.checkout') }}" class="d-inline-block mb-4 float-start btn bg-cart"
-                                style="text-decoration:none;">
+                            <a href="{{ route('credit.checkout') }}" class="d-inline-block mb-4 float-start btn bg-cart" style="text-decoration:none;">
                                 <span> {{ __('بطاقة ائتمانية') }}</span>
                                 <i class="fas fa-credit-card"></i>
                             </a>
@@ -88,9 +85,7 @@
 
 @section('script')
     <!-- Replace "test" with your own sandbox Business account app client ID -->
-    <script
-        src="https://www.paypal.com/sdk/js?client-id=Ad9KWQWeBL6Zqg45C56qx-oc00j6qo-MR-Wx7DCwui8EzGTWOe2U6MjpP9GNZv4c7G6PpL6MAGHvn2cy&currency=USD">
-    </script>
+    <script src="https://www.paypal.com/sdk/js?client-id=Ad9KWQWeBL6Zqg45C56qx-oc00j6qo-MR-Wx7DCwui8EzGTWOe2U6MjpP9GNZv4c7G6PpL6MAGHvn2cy&currency=USD"></script>
 
     <script>
         paypal.Buttons({

@@ -35,17 +35,19 @@ class PurchaseController extends Controller
         $total = 0;
 
         foreach ($books as  $book) {
-            $total += $book->price + $book->pivot->number_of_copies;  // pivot to get number of copies in cart "the pivot table"
+            $total += $book->price * $book->pivot->number_of_copies;  // pivot to get number of copies in cart "the pivot table"
         }
 
         $order = $this->provider->createOrder([
             'intent' => 'CAPTURE',
             'purchase_units' => [
-                'amount' =>  [
-                    'currency_code' => 'USD',
-                    'value' => $total
-                ],
-                'description' => 'Order Description'
+                [
+                    'amount' =>  [
+                        'currency_code' => 'USD',
+                        'value' => $total
+                    ],
+                    'description' => 'Order Description'
+                ]
             ]
         ]);
 
@@ -63,7 +65,7 @@ class PurchaseController extends Controller
             $user = User::find($data['userId']);
             $books = $user->booksInCart;
 
-            $this->sendOrderConfirmationMail($books, auth()->user()); // send confirmation mail
+            $this->sendOrderConfirmationMail($books, $user); // send confirmation mail
 
             // save the book info when purchase it to show it later in the payments page
             foreach ($books as $book) {
